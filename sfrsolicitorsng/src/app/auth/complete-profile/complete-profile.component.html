@@ -1,0 +1,325 @@
+<h1
+  style="margin-left: 4vw; margin-top: 5vh; color: #7ec8e3; text-align: center;"
+>
+  Complete your profile
+</h1>
+
+<!-- Import necessary modules -->
+<mat-horizontal-stepper linear #stepper>
+  <mat-step [stepControl]="personalDetails">
+    <ng-template matStepLabel>
+      <mat-icon>person</mat-icon>
+      Personal Details
+    </ng-template>
+    <!-- Personal details form -->
+    <form [formGroup]="personalDetails">
+      <mat-form-field>
+        <input matInput placeholder="Name" formControlName="name" />
+        <mat-error *ngIf="personalDetails.get('name').invalid">
+          Please enter a valid name.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Surname" formControlName="surname" />
+        <mat-error *ngIf="personalDetails.get('surname').invalid">
+          Please enter a valid surname.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Home Address"
+          formControlName="homeAddress"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Phone Number"
+          formControlName="phoneNumber"
+        />
+        <mat-error *ngIf="personalDetails.get('phoneNumber').invalid">
+          Please enter a valid phone number.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Email" formControlName="email" />
+        <mat-error *ngIf="personalDetails.get('email').invalid">
+          Please enter a valid email.
+        </mat-error>
+      </mat-form-field>
+    </form>
+    <div>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+
+  <mat-step [stepControl]="professionalExp">
+    <ng-template matStepLabel>
+      <mat-icon>work</mat-icon>
+      Professional Experience
+    </ng-template>
+    <!-- Professional experience form -->
+    <form [formGroup]="professionalExp">
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Fields of Expertise"
+          formControlName="fieldsOfExpertise"
+        />
+        <mat-error *ngIf="professionalExp.get('fieldsOfExpertise').invalid">
+          Please enter fields of expertise.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Years of Experience"
+          formControlName="yearsOfExperience"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Keywords" formControlName="keywords" />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Number of Completed Cases"
+          formControlName="numberOfCompletedCases"
+        />
+        <mat-error
+          *ngIf="professionalExp.get('numberOfCompletedCases').invalid"
+        >
+          Please enter the number of completed cases.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Type of Expert Work"
+          formControlName="typeOfExpertWork"
+        />
+        <mat-error *ngIf="professionalExp.get('typeOfExpertWork').invalid">
+          Please enter type of expert work.
+        </mat-error>
+      </mat-form-field>
+      <!-- Types of Civil Cases -->
+      <mat-form-field formGroupName="typesOfCivilCases">
+        <input
+          matInput
+          placeholder="Civil Case Reports Options"
+          formControlName="civilCaseReportsOptions"
+        />
+      </mat-form-field>
+      <!-- Types of Criminal Cases -->
+      <mat-form-field formGroupName="typesOfCriminalCases">
+        <input
+          matInput
+          placeholder="Criminal Case Reports Options"
+          formControlName="criminalCaseReportsOptions"
+        />
+      </mat-form-field>
+      <!-- Ratio of Instructions -->
+      <h2 matStepperIcon>4</h2>
+      <h3 matStepLabel>Ratio of Instructions</h3>
+      <div formGroupName="ratioOfInstructions">
+        <mat-form-field formGroupName="criminalCases">
+          <input matInput placeholder="Defence" formControlName="defence" />
+        </mat-form-field>
+        <mat-form-field formGroupName="criminalCases">
+          <input
+            matInput
+            placeholder="Prosecution"
+            formControlName="prosecution"
+          />
+        </mat-form-field>
+        <mat-form-field formGroupName="civilCases">
+          <input matInput placeholder="Defendant" formControlName="defendant" />
+        </mat-form-field>
+        <mat-form-field formGroupName="civilCases">
+          <input matInput placeholder="Claimant" formControlName="claimant" />
+        </mat-form-field>
+      </div>
+      <!-- Court Appearances -->
+      <h2 matStepperIcon>5</h2>
+      <h3 matStepLabel>Court Appearances</h3>
+      <div formGroupName="courtAppearances">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Number of Appearances"
+            formControlName="numberOfAppearances"
+          />
+        </mat-form-field>
+        <mat-checkbox formControlName="faceToFace">Face to Face</mat-checkbox>
+        <mat-checkbox formControlName="jointInstructions">
+          Joint Instructions
+        </mat-checkbox>
+        <mat-checkbox formControlName="externalVetting">
+          External Vetting
+        </mat-checkbox>
+        <mat-form-field
+          *ngIf="
+            formGroup.get('professionalExp.courtAppearances.externalVetting')
+              .value === true
+          "
+        >
+          <input
+            matInput
+            placeholder="External Vetting Details"
+            formControlName="externalVettingDetails"
+          />
+        </mat-form-field>
+      </div>
+      <!-- Rate -->
+      <h2 matStepperIcon>6</h2>
+      <h3 matStepLabel>Rate</h3>
+      <div formGroupName="rate">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Writing Report"
+            formControlName="writingReport"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Activities Out of Original Instruction"
+            formControlName="activitiesOutOfOriginalInstruction"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Attending Court"
+            formControlName="attendingCourt"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Travelling Time"
+            formControlName="travellingTime"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Class of Public Travel</mat-label>
+          <mat-select formControlName="classOfPublicTravelOptions">
+            <mat-option value="1st Class">1st Class</mat-option>
+            <mat-option value="2nd Class">2nd Class</mat-option>
+            <mat-option value="Standard Class">Standard Class</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <!-- Court Cancellation -->
+      <h2 matStepperIcon>7</h2>
+      <h3 matStepLabel>Court Cancellation</h3>
+      <div formGroupName="courtCancellation">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="No Fee Days Notice"
+            formControlName="noFeeDaysNotice"
+          />
+          <mat-error
+            *ngIf="
+              formGroup.get('professionalExp.courtCancellation.noFeeDaysNotice')
+                .invalid
+            "
+          >
+            Please enter a valid number
+          </mat-error>
+        </mat-form-field>
+        <div formGroupName="feeDaysNotice1">
+          <mat-form-field>
+            <input matInput placeholder="Days Notice" formControlName="daysNotice">
+<mat-error *ngIf="professionalExp.controls.courtCancellation.controls.feeDaysNotice1.controls.daysNotice.invalid && (professionalExp.controls.courtCancellation.controls.feeDaysNotice1.controls.daysNotice.dirty || professionalExp.controls.courtCancellation.controls.feeDaysNotice1.controls.daysNotice.touched)">
+  Please enter a valid number of days notice.
+</mat-error>
+</mat-form-field>
+<mat-form-field>
+<input matInput placeholder="Fee Amount" formControlName="feeAmount">
+<mat-error *ngIf="professionalExp.controls.courtCancellation.controls.feeDaysNotice1.controls.feeAmount.invalid && (professionalExp.controls.courtCancellation.controls.feeDaysNotice1.controls.feeAmount.dirty || professionalExp.controls.courtCancellation.controls.feeDaysNotice1.controls.feeAmount.touched)">
+  Please enter a valid fee amount.
+</mat-error>
+</mat-form-field>
+</div>
+<div formGroupName="feeDaysNotice2">
+<mat-form-field>
+<input matInput placeholder="Days Notice" formControlName="daysNotice">
+<mat-error *ngIf="professionalExp.controls.courtCancellation.controls.feeDaysNotice2.controls.daysNotice.invalid && (professionalExp.controls.courtCancellation.controls.feeDaysNotice2.controls.daysNotice.dirty || professionalExp.controls.courtCancellation.controls.feeDaysNotice2.controls.daysNotice.touched)">
+  Please enter a valid number of days notice.
+</mat-error>
+</mat-form-field>
+<mat-form-field>
+<input matInput placeholder="Fee Amount" formControlName="feeAmount">
+<mat-error *ngIf="professionalExp.controls.courtCancellation.controls.feeDaysNotice2.controls.feeAmount.invalid && (professionalExp.controls.courtCancellation.controls.feeDaysNotice2.controls.feeAmount.dirty || professionalExp.controls.courtCancellation.controls.feeDaysNotice2.controls.feeAmount.touched)">
+  Please enter a valid fee amount.
+</mat-error>
+</mat-form-field>
+</div>
+</div>
+<!-- Offer Free Consultation and Free Time Limit -->
+<mat-checkbox formControlName="offerFreeConsultation" class="example-margin">Offer Free Consultation</mat-checkbox>
+<mat-form-field>
+<input matInput placeholder="Free Time Limit" formControlName="freeTimeLimit">
+<mat-error *ngIf="professionalExp.controls.courtCancellation.controls.freeTimeLimit.invalid && (professionalExp.controls.courtCancellation.controls.freeTimeLimit.dirty || professionalExp.controls.courtCancellation.controls.freeTimeLimit.touched)">
+Please enter a valid free time limit.
+</mat-error>
+</mat-form-field>
+
+</div>
+<!-- Organization Details -->
+<div [formGroup]="professionalExp.controls.orgDetails">
+<h3>Organization Details</h3>
+<mat-radio-group formControlName="servicesThroughOrganization">
+  <mat-radio-button value="Yes">Yes</mat-radio-button>
+  <mat-radio-button value="No">No</mat-radio-button>
+</mat-radio-group>
+<mat-form-field>
+<input matInput placeholder="Name of Organization" formControlName="nameOfOrg">
+<mat-error *ngIf="professionalExp.controls.orgDetails.controls.nameOfOrg.invalid && (professionalExp.controls.orgDetails.controls.nameOfOrg.dirty || professionalExp.controls.orgDetails.controls.nameOfOrg.touched)">
+  Please enter a valid name of organization.
+</mat-error>
+</mat-form-field>
+<!-- VAT Charge Option and VAT Number -->
+<mat-radio-group formControlName="vatChargeOption">
+  <mat-radio-button value="Yes">Yes</mat-radio-button>
+  <mat-radio-button value="No">No</mat-radio-button>
+</mat-radio-group>
+<mat-form-field>
+<input matInput placeholder="VAT Number" formControlName="vatNumber">
+<mat-error *ngIf="orgDetails.controls['vatNumber'].invalid && (orgDetails.controls['vatChargeOption'].value === 'yes')">
+  Please enter a valid VAT number.
+  </mat-error>
+  
+  </div>
+  <!-- Payment Terms -->
+  <h2>Payment Terms</h2>
+  <div formGroupName="paymentTerms">
+    <mat-checkbox formControlName="preTrialWorkForPubliclyFundedCasesOption">
+      Pre-trial work for publicly funded cases
+    </mat-checkbox>
+    <mat-form-field>
+      <input matInput placeholder="Number of days for other work" formControlName="noOfDaysForOtherWork">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Late payment interest rate" formControlName="latePaymentInterestRate">
+    </mat-form-field>
+    <mat-checkbox formControlName="dataControllerOrProcessorOption">
+      Are you acting as a data controller or processor?
+    </mat-checkbox>
+  </div>
+  <!-- CV Upload -->
+  <h2>CV Upload</h2>
+  <div>
+    <input type="file" (change)="onFileSelected($event)">
+    <mat-error *ngIf="cvFileError">
+      {{ cvFileError }}
+    </mat-error>
+  </div>
+  <!-- Submit Button -->
+  <button mat-raised-button color="primary" type="submit" [disabled]="!expertForm.valid">Submit</button>
+  
+  </form>
